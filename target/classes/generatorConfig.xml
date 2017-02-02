@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE generatorConfiguration
+         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+ 
+ <generatorConfiguration>
+     <classPathEntry
+             location="E:\maven_repository\mysql\mysql-connector-java\5.1.36\mysql-connector-java-5.1.36.jar"/>
+     <context id="my" targetRuntime="MyBatis3">
+         <commentGenerator>
+             <property name="suppressDate" value="false"/>
+             <property name="suppressAllComments" value="true"/>
+         </commentGenerator>
+ 
+         <jdbcConnection driverClass="com.mysql.jdbc.Driver"  
+                        connectionURL="jdbc:mysql://localhost:3306/qingyuanschool?characterEncoding=utf8" userId="root"  
+                        password="123"/>
+ 
+         <javaModelGenerator targetPackage="com.qypt.department.entity"
+                             targetProject="E:/java/项目测试目录/RedisTest/src/main/java">
+             <property name="enableSubPackages" value="true"/>
+             <property name="trimStrings" value="true"/>
+         </javaModelGenerator>
+ 
+         <sqlMapGenerator targetPackage="com.qypt.department.dao"
+                          targetProject="E:/java/项目测试目录/RedisTest/src/main/java">
+             <property name="enableSubPackages" value="true"/>
+         </sqlMapGenerator>
+ 
+         <javaClientGenerator targetPackage="com.qypt.department.mapper"
+                              targetProject="E:/java/项目测试目录/RedisTest/src/main/java" type="XMLMAPPER">
+             <property name="enableSubPackages" value="true"/>
+         </javaClientGenerator>
+
+ 
+         <table tableName="Department" domainObjectName="Department" />
+ 
+     </context>
+ </generatorConfiguration>

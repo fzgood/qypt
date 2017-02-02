@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="RedisTest"
+  id="myeclipse.1485942027001"
+  context-root="/RedisTest"
+  j2ee-spec="1.7"
+  archive="RedisTest.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
