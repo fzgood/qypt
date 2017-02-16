@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qypt.backstage.dao.classes.ClassesCustomMapper">
+	<sql id="condition">
+		<where>
+			d.department_id = c.department_id and 1=1
+			<if test="classId !=null and classId !=''">
+				and c.class_id LIKE '%${classId}%'
+			</if>
+			<if test="className !=null and className !=''">
+				and c.class_name LIKE '%${className}%'
+			</if>
+			<if test="departmentId !=null and departmentId !=''">
+				and d.department_id = #{departmentId}
+			</if>
+		</where>
+	</sql>
+
+	<resultMap type="com.qypt.backstage.entity.classes.ClassesCustom" id="classesMap">
+		<id column="class_id" property="classId" />
+		<result column="class_name" property="className" />
+		<result column="department_id" property="department.departmentId" />
+		<result column="state" property="state" />
+		<collection property="department" javaType="com.qypt.backstage.entity.department.Department">
+			<id column="department_id" property="departmentId" />
+			<result column="department_name" property="departmentName" />
+		</collection>
+	</resultMap>
+
+	<select id="selectClasses" resultMap="classesMap"
+		resultType="com.qypt.backstage.entity.classes.ClassesCustom">
+		SELECT
+		*
+		FROM
+		department d,
+		classes c
+		<include refid="condition"></include>
+		ORDER BY d.`department_id`
+		LIMIT ${pageIndex}, 10
+	</select>
+
+	<select id="selectCount" resultType="java.lang.Integer"
+		parameterType="com.qypt.backstage.entity.classes.ClassesCustom">
+		SELECT
+		count(*)
+		FROM
+		department d,
+		classes c
+		<include refid="condition"></include>
+	</select>
+
+	<select id="selectClassesById" resultMap="classesMap"
+		resultType="com.qypt.backstage.entity.classes.ClassesCustom">
+		SELECT
+		count(*)
+		FROM
+		department d,
+		classes c
+		<include refid="condition"></include>
+	</select>
+
+
+</mapper>

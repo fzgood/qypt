@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qypt.backstage.dao.student.StudentCustomMapper">
+	<sql id="condition">
+		<where>
+			s.`department_id` = d.`department_id`
+			and s.`class_id` = c.`class_id`
+			and 1=1
+			<if test="departmentId !=null and departmentId !=''">
+				and d.`department_id` = #{departmentId}
+			</if>
+			<if test="classId !=null and classId !=''">
+				and c.class_id = #{classId}
+			</if>
+			<if test="studentId !=null and studentId !=''">
+				and s.`student_id` = #{studentId}
+			</if>
+			<if test="studentName !=null and studentName !=''">
+				and s.student_name LIKE '%${studentName}%'
+			</if>
+		</where>
+	</sql>
+
+	<resultMap type="com.qypt.backstage.entity.student.StudentCustom"
+		id="studentMap">
+		<id column="student_id" property="studentId" />
+		<result column="student_name" property="studentName" />
+		<result column="sex" property="sex" />
+		<result column="phone" property="phone" />
+		<result column="address" property="address" />
+		<result column="entranceTime" property="entranceTime" />
+		<result column="img_url" property="imgUrl" />
+		<result column="classes_id" property="classes.classesId" />
+		<result column="department_id" property="department.departmentId" />
+		<collection property="department"
+			javaType="com.qypt.backstage.entity.department.Department">
+			<id column="department_id" property="departmentId" />
+			<result column="department_name" property="departmentName" />
+		</collection>
+		<collection property="classes"
+			javaType="com.qypt.backstage.entity.classes.Classes">
+			<id column="class_id" property="classId" />
+			<result column="class_name" property="className" />
+			<result column="state" property="state" />
+		</collection>
+	</resultMap>
+	<select id="selectStudentById" parameterType="java.lang.Integer"
+		resultType="java.lang.String">
+		SELECT
+		s.`student_id`
+		FROM
+		`student` s
+		WHERE department_id =
+		#{id}
+		ORDER BY s.`student_id` DESC
+		LIMIT 1
+	</select>
+
+	<select id="selectStudentAll" resultMap="studentMap"
+		parameterType="com.qypt.backstage.entity.student.StudentCustom">
+		SELECT
+		*
+		FROM
+		`student` s,
+		department d,
+		classes c
+		<include refid="condition"></include>
+		ORDER BY s.`student_id`
+	</select>
+
+	<update id="updateStudentPhoto" parameterType="com.qypt.backstage.entity.student.Student">
+		UPDATE student SET img_url=#{imgUrl} WHERE student_id=#{studentId}
+	</update>
+
+
+</mapper>

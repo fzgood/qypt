@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qypt.backstage.dao.course.CourseinformationCustomMapper">
+	<sql id="condition">
+		<where>
+			d.department_id = c.department_id and 1=1
+			<if test="departmentId !=null and departmentId !=''">
+				and c.department_id = #{departmentId}
+			</if>
+		</where>
+	</sql>
+
+	<resultMap type="com.qypt.backstage.entity.course.CourseinformationCustom" id="ciMap">
+		<id column="ci_id" property="ciId" />
+		<result column="ci_name" property="ciName" />
+		<result column="department_id" property="department.departmentId" />
+		<collection property="department" javaType="com.qypt.backstage.entity.department.Department">
+			<id column="department_id" property="departmentId" />
+			<result column="department_name" property="departmentName" />
+		</collection>
+	</resultMap>
+
+	<select id="selectCIAll" resultMap="ciMap" >
+		SELECT
+		*
+		FROM
+		department d,
+		courseinformation c
+		<include refid="condition"></include>
+		ORDER BY d.`department_id`
+	</select>
+
+
+</mapper>

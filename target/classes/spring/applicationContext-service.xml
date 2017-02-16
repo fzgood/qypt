@@ -14,6 +14,13 @@
             http://www.springframework.org/schema/tx   
             http://www.springframework.org/schema/tx/spring-tx-3.0.xsd ">
 
-
-
+	<bean id="departmentService" class="com.qypt.backstage.service.impl.DepartmentServiceImpl"></bean>
+	<bean id="teacherService" class="com.qypt.backstage.service.impl.TeacherServiceImpl"></bean>
+	<bean id="classesService" class="com.qypt.backstage.service.impl.ClassesServiceImpl"></bean>
+	<bean id="courseinfomationService" class="com.qypt.backstage.service.impl.CourseinformationServiceImpl"></bean>
+	<bean id="studentService" class="com.qypt.backstage.service.impl.StudentServiceImpl"></bean>
+	<bean id="scoreServiceImple" class="com.qypt.backstage.service.impl.ScoreServiceImple"></bean>
+	<bean id="scoreInfoServiceImple" class="com.qypt.backstage.service.impl.ScoreInfoServiceImple"></bean>
+	<bean id="courseService" class="com.qypt.backstage.service.impl.CourseServiceImpl"></bean>
+	<bean id="peAdminService" class="com.qypt.backstage.service.impl.PeAdminServiceImpl"></bean>
 </beans>              

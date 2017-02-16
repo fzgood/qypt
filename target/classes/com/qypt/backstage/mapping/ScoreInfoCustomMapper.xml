@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qypt.backstage.dao.score.ScoreInfoCustomMapper">
+	<sql id="condition">
+		<where>
+			s.`student_id` = st.`student_id`
+			AND c.`class_id` =
+			st.`class_id`
+			AND st.`department_id` = 4
+			and s.score_id = #{scoreId}
+		</where>
+	</sql>
+	<resultMap type="com.qypt.backstage.entity.score.ScoreInfoCustom"
+		id="scoreMap">
+		<result column="class_id" property="classes.classId" />
+		<result column="student_id" property="student.studentId" />
+		<result column="score_id" property="scoreId" />
+		<result column="linux" property="linux" />
+		<result column="php" property="php" />
+		<result column="java" property="java" />
+		<result column="jquery" property="jquery" />
+		<result column="wlyx" property="wlyx" />
+		<result column="hkgf" property="hkgf" />
+		<collection property="student"
+			javaType="com.qypt.backstage.entity.student.StudentCustom">
+			<id column="student_id" property="studentId" />
+			<result column="student_name" property="studentName" />
+			<result column="department_id" property="departmentId" />
+			<result column="class_id" property="classId" />
+		</collection>
+		<collection property="classes"
+			javaType="com.qypt.backstage.entity.classes.ClassesCustom">
+			<id column="class_id" property="classId" />
+			<result column="class_name" property="className" />
+			<result column="department_id" property="departmentId" />
+		</collection>
+	</resultMap>
+	<select id="selectScoreDepartment" resultMap="scoreMap"
+		parameterType="java.lang.Integer">
+		SELECT
+		c.`class_id`,
+		c.`class_name`,
+		st.`student_id`,
+		st.`student_name`,
+		MAX(
+		CASE
+		WHEN s.`ci_id` =
+		'1'
+		THEN s.fraction
+		END
+		) AS linux,
+		MAX(
+		CASE
+		WHEN
+		s.`ci_id` = '2'
+		THEN
+		s.fraction
+		END
+		) AS php,
+		MAX(
+		CASE
+		WHEN s.`ci_id` = '5'
+		THEN s.fraction
+		END
+		)
+		AS java,
+		MAX(
+		CASE
+		WHEN s.`ci_id` = '6'
+		THEN s.fraction
+		END
+		) AS jquery,
+		MAX(
+		CASE
+		WHEN s.`ci_id` = '8'
+		THEN s.fraction
+		END
+		) AS
+		wlyx,
+		MAX(
+		CASE
+		WHEN
+		s.`ci_id` = '9'
+		THEN s.fraction
+		END
+		) AS hkgf,
+		s.`score_id`
+		FROM
+		`score_info` s,
+		student st,
+		classes c
+		<include refid="condition"></include>
+		GROUP BY st.`student_id`
+
+	</select>
+
+	<insert id="insertStudentScoreInfo" parameterType="java.util.List">
+		insert into
+		score_info(student_id,ci_id,fraction,score_id)values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.studentId},#{item.ciId},#{item.fraction},#{item.scoreId})
+		</foreach>
+	</insert>
+
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qypt.backstage.dao.score.ScoreInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.qypt.backstage.entity.score.ScoreInfo" >
+    <result column="student_id" property="studentId" jdbcType="VARCHAR" />
+    <result column="ci_id" property="ciId" jdbcType="INTEGER" />
+    <result column="fraction" property="fraction" jdbcType="DOUBLE" />
+    <result column="score_id" property="scoreId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    student_id, ci_id, fraction, score_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qypt.backstage.entity.score.ScoreInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from score_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.qypt.backstage.entity.score.ScoreInfoExample" >
+    delete from score_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qypt.backstage.entity.score.ScoreInfo" >
+    insert into score_info (student_id, ci_id, fraction, 
+      score_id)
+    values (#{studentId,jdbcType=VARCHAR}, #{ciId,jdbcType=INTEGER}, #{fraction,jdbcType=DOUBLE}, 
+      #{scoreId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qypt.backstage.entity.score.ScoreInfo" >
+    insert into score_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="ciId != null" >
+        ci_id,
+      </if>
+      <if test="fraction != null" >
+        fraction,
+      </if>
+      <if test="scoreId != null" >
+        score_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="ciId != null" >
+        #{ciId,jdbcType=INTEGER},
+      </if>
+      <if test="fraction != null" >
+        #{fraction,jdbcType=DOUBLE},
+      </if>
+      <if test="scoreId != null" >
+        #{scoreId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qypt.backstage.entity.score.ScoreInfoExample" resultType="java.lang.Integer" >
+    select count(*) from score_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update score_info
+    <set >
+      <if test="record.studentId != null" >
+        student_id = #{record.studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ciId != null" >
+        ci_id = #{record.ciId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fraction != null" >
+        fraction = #{record.fraction,jdbcType=DOUBLE},
+      </if>
+      <if test="record.scoreId != null" >
+        score_id = #{record.scoreId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update score_info
+    set student_id = #{record.studentId,jdbcType=VARCHAR},
+      ci_id = #{record.ciId,jdbcType=INTEGER},
+      fraction = #{record.fraction,jdbcType=DOUBLE},
+      score_id = #{record.scoreId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
