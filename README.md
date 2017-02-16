@@ -11,7 +11,7 @@
 
 图片展示
 
-登录界面：
+登录界面： 用户的登录 账号 密码 均为 admin
 ![image](https://github.com/fzgood/qyptimg/blob/master/denglu.png)
 公告栏：
 ![image](https://github.com/fzgood/qyptimg/blob/master/gonggao.png)
