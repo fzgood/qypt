@@ -7,6 +7,8 @@
 主要技术:分页查询，ajax，登录拦截器，文件上传 
 前台技术:bootstarp
 
+在开发中 sql语句是使用了 mybatis的逆向工程 来完成的 部分mapping 是自己实现 自己实现的mapping 加了Custom 后缀
+
 图片展示
 
 登录界面：
