@@ -8,3 +8,22 @@
 前台技术:bootstarp
 
 图片展示
+
+登录界面：
+![image](https://github.com/fzgood/qyptimg/blob/master/denglu.png)
+公告栏：
+![image](https://github.com/fzgood/qyptimg/blob/master/gonggao.png)
+院系：
+![image](https://github.com/fzgood/qyptimg/blob/master/yuanxi.png)
+班级：
+![image](https://github.com/fzgood/qyptimg/blob/master/banji.png)
+课程：
+![image](https://github.com/fzgood/qyptimg/blob/master/kecheng.png)
+老师：
+![image](https://github.com/fzgood/qyptimg/blob/master/laoshi.png)
+学生：
+![image](https://github.com/fzgood/qyptimg/blob/master/xuesheng.png)
+系部学生成绩表 
+![image](https://github.com/fzgood/qyptimg/blob/master/xbchengji.png)
+学生成就
+![image](https://github.com/fzgood/qyptimg/blob/master/xueshengcj.png)
